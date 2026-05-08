@@ -1,0 +1,91 @@
+/* =============================================
+   estilos.css — Retro Gaming
+   Complementa Bootstrap 5, no lo sobreescribe
+   ============================================= */
+
+/* Fondo general */
+body {
+    background-image: url("imagenes/fondo01.gif");
+    background-color: #111;
+}
+
+/* Navbar: borde inferior retro */
+.navbar {
+    border-bottom: 2px solid #00e1ff;
+}
+
+.navbar-brand img {
+    filter: drop-shadow(0 0 6px #00e1ff88);
+}
+
+.nav-link:hover {
+    color: #00e1ff !important;
+}
+
+/* Carrusel */
+.carousel-item img {
+    filter: brightness(0.75);
+}
+
+.carousel-caption h5 {
+    text-shadow: 0 0 10px #00e1ff;
+    font-size: 1.5rem;
+}
+
+/* Cards de categorías (Home) */
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 14px #00e1ff !important;
+    border-color: #00e1ff !important;
+}
+
+/* Imágenes de juegos en grilla */
+.juego-img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 6px 6px 0 0;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.juego-img:hover {
+    transform: scale(1.06);
+    filter: brightness(1.15);
+}
+
+/* Separadores de sección */
+h4.text-warning {
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px #ffc107aa;
+}
+
+/* Intro (index) */
+.display-4 {
+    text-shadow: 0 0 12px #00ffff;
+    letter-spacing: 2px;
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid #333;
+    font-size: 14px;
+}
+
+/* Top juegos (index) */
+.juego-top {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #333;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.juego-top:hover {
+    transform: scale(1.08);
+    border-color: #00e1ff;
+}

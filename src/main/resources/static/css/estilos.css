@@ -1,0 +1,39 @@
+body {
+    background-image: url("../imagenes/fondo01.gif");
+    background-color: #111;
+}
+
+/* Card del formulario: glow retro */
+.card {
+    box-shadow: 0 0 20px #ffc10755;
+    transition: box-shadow 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 0 28px #ffc107aa;
+}
+
+/* Inputs: efecto focus retro */
+.form-control:focus,
+.form-select:focus {
+    border-color: #ffc107 !important;
+    box-shadow: 0 0 8px #ffc10788 !important;
+}
+
+/* Botón principal */
+.btn-warning {
+    letter-spacing: 1px;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-warning:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 10px #ffc10799;
+}
+
+/* Imagen pacman centrada */
+img[alt="Pacman"] {
+    display: block;
+    margin: 10px auto 0;
+}

@@ -1,0 +1,47 @@
+
+/* Fondo con GIF */
+body {
+    background-image: url("/imagenes/fondo01.gif");
+    background-color: #111;
+}
+
+/* Logo superior */
+.img-retro {
+    width: 180px;
+    height: auto;
+    filter: drop-shadow(0 0 8px #00e1ff88);
+}
+
+/* Card del formulario: glow cyan retro */
+.card {
+    box-shadow: 0 0 20px #00e1ff44;
+    transition: box-shadow 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 0 28px #00e1ff99;
+}
+
+/* Inputs: efecto focus retro */
+.form-control:focus {
+    border-color: #ffc107 !important;
+    box-shadow: 0 0 8px #ffc10788 !important;
+}
+
+/* Botón ingresar */
+.btn-warning {
+    letter-spacing: 1px;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-warning:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 10px #ffc10799;
+}
+
+/* Links */
+a.text-warning:hover,
+a.text-info:hover {
+    text-decoration: underline;
+}

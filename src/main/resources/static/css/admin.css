@@ -1,0 +1,61 @@
+/* Fondo con GIF y overlay */
+body {
+    background-image: url("../imagenes/fondo01.gif");
+    background-color: #111;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+    z-index: -1;
+}
+
+/* Título principal */
+h1.text-warning {
+    text-shadow: 0 0 10px #ffc107aa;
+}
+
+/* Navbar borde retro */
+.navbar {
+    border-bottom: 2px solid #00eaff;
+}
+
+/* Tabla: glow en encabezado */
+.table thead th {
+    text-shadow: 0 0 8px #00eaff;
+    letter-spacing: 1px;
+}
+
+/* Botones de acción en tabla */
+.btn-bloquear {
+    background: #ff4444;
+    color: white;
+    box-shadow: 0 0 5px red;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-bloquear:hover {
+    background: #cc0000;
+}
+
+.btn-desbloquear {
+    background: #44ff44;
+    color: black;
+    box-shadow: 0 0 5px #00ff00;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-desbloquear:hover {
+    background: #22cc22;
+}
