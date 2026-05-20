@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle Boleta</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark text-white">
+
+<div class="container my-5">
+
+    <div class="card bg-black text-white border-warning p-4">
+
+        <h3 class="text-warning">Boleta #<span th:text="${boleta.id}"></span></h3>
+
+        <p><strong>Cliente:</strong> <span th:text="${boleta.usuario.usuario}"></span></p>
+        <p><strong>Fecha:</strong> <span th:text="${boleta.fecha}"></span></p>
+
+        <hr class="text-warning">
+
+        <table class="table table-dark table-bordered">
+
+            <thead class="table-warning text-dark">
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="d : ${boleta.detalles}">
+
+                <td th:text="${d.producto.nombre}"></td>
+                <td th:text="${d.cantidad}"></td>
+                <td th:text="${d.precio}"></td>
+                <td th:text="${d.cantidad * d.precio}"></td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+        <h4 class="text-end text-success">
+            Total: <span th:text="${boleta.total}"></span>
+        </h4>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,58 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Retro Gaming - Emuladores</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" th:href="@{/css/estilos.css}">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Emuladores - Retro Gaming</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+  <link rel="stylesheet"
+        th:href="@{/css/estilos.css}">
 </head>
 
-<body class="bg-dark text-white">
+<body class="bg-dark text-white d-flex flex-column min-vh-100">
 
-<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="fragments/navbar :: navbar"></div>
 
-<main class="container my-5">
-  <h2 class="text-center text-warning mb-5">Emuladores por Plataforma</h2>
+<main class="container my-5 flex-grow-1">
 
-  <div th:each="plataforma : ${plataformas}">
+  <h2 class="text-center text-warning mb-5">
+    Emuladores Disponibles
+  </h2>
 
-    <h4 class="text-warning border-bottom border-warning pb-2 mb-3"
-        th:text="${plataforma['nombre']}">Plataforma</h4>
+  <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-3">
 
-    <div class="row row-cols-2 row-cols-md-3 g-3 mb-5">
+    <div class="col" th:each="emulador : ${productos}">
 
-      <div class="col" th:each="emulador : ${plataforma['items']}">
+      <div class="card bg-secondary text-white h-100">
 
-        <div class="card bg-secondary text-white h-100 producto"
-             th:attr="data-nombre=${emulador['nombre']},
-                    data-precio=${emulador['precio']},
-                    data-imagen=${emulador['imagen']}">
+        <img th:src="@{${emulador.imagen}}"
+             class="card-img-top juego-img"
+             th:alt="${emulador.nombre}">
 
-          <img th:src="@{${emulador['imagen']}}"
-               class="card-img-top juego-img"
-               th:alt="${emulador['nombre']}">
+        <div class="card-body text-center p-2">
 
-          <div class="card-body text-center p-2">
-            <p class="card-title fw-bold" th:text="${emulador['nombre']}"></p>
-            <p class="card-text small" th:text="'S/ ' + ${emulador['precio']}"></p>
+          <p class="fw-bold small"
+             th:text="${emulador.nombre}">
+          </p>
 
-            <button class="btn btn-warning btn-sm w-100 agregar-carrito">
+          <p class="small"
+             th:text="'S/ ' + ${#numbers.formatDecimal(emulador.precio,1,2)}">
+          </p>
+
+          <form th:action="@{/carrito/agregar}"
+                method="post">
+
+            <input type="hidden"
+                   name="nombre"
+                   th:value="${emulador.nombre}">
+
+            <input type="hidden"
+                   name="precio"
+                   th:value="${emulador.precio}">
+
+            <input type="hidden"
+                   name="imagen"
+                   th:value="${emulador.imagen}">
+
+            <button type="submit"
+                    class="btn btn-warning btn-sm w-100">
+
               Agregar al carrito
+
             </button>
-          </div>
+
+          </form>
 
         </div>
 
       </div>
+
     </div>
+
   </div>
 
 </main>
 
+<div th:replace="fragments/footer :: footer"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script th:src="@{/js/carrito.js}"></script>
 
 </body>
 </html>
