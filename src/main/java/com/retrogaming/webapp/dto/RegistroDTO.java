@@ -12,7 +12,7 @@ public class RegistroDTO {
     @NotBlank(message = "Ingrese usuario")
     private String usuario;
 
-
+    @NotBlank
     private Long id;
 
     private boolean activo;
