@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -24,6 +25,8 @@ public class BoletaDTO {
 
     @NotBlank(message = "Ingrese DNI")
     private String clienteDni;
+
+    private LocalDateTime fecha;
 
     @NotBlank(message = "Seleccione método")
     private String metodoPago;

@@ -33,8 +33,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "/admin/**",
                         "/productos/admin/**",
                         "/usuarios/**",
-                        "/boletas",            // GET - listar todas
-                        "/boletas/eliminar/*"  // GET - borrar por id
+                        "/boletas",
+                        "/boletas/eliminar/*"
                 );
     }
 }

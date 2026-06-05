@@ -12,6 +12,11 @@ public class RegistroDTO {
     @NotBlank(message = "Ingrese usuario")
     private String usuario;
 
+
+    private Long id;
+
+    private boolean activo;
+
     @Email(message = "Correo inválido")
     @NotBlank(message = "Ingrese correo")
     private String correo;

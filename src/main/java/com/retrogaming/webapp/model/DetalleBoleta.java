@@ -1,4 +1,4 @@
-package com.retrogaming.webapp.entity;
+package com.retrogaming.webapp.model;
 
 import jakarta.persistence.*;
 import lombok.*;

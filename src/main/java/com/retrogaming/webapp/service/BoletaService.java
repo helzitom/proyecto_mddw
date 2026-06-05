@@ -1,64 +1,44 @@
 package com.retrogaming.webapp.service;
 
 import com.retrogaming.webapp.dto.BoletaDTO;
-import com.retrogaming.webapp.dto.DetalleBoletaDTO;
-import com.retrogaming.webapp.entity.Boleta;
-import com.retrogaming.webapp.entity.DetalleBoleta;
+import com.retrogaming.webapp.mapper.BoletaMapper;
+import com.retrogaming.webapp.model.Boleta;
 import com.retrogaming.webapp.repository.BoletaRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
 public class BoletaService {
 
-    @Autowired
-    private BoletaRepository boletaRepository;
+    private final BoletaRepository boletaRepository;
+    private final BoletaMapper boletaMapper;
 
-    public List<Boleta> listarTodas() {
-        return boletaRepository.findAll();
+    public BoletaService(BoletaRepository boletaRepository,
+                         BoletaMapper boletaMapper) {
+        this.boletaRepository = boletaRepository;
+        this.boletaMapper     = boletaMapper;
     }
 
-    public Boleta guardar(BoletaDTO dto) {
-
-        Boleta boleta = new Boleta();
-
-        boleta.setNumero(dto.getNumero());
-        boleta.setFecha(LocalDateTime.now());
-        boleta.setClienteNombre(dto.getClienteNombre());
-        boleta.setClienteDni(dto.getClienteDni());
-        boleta.setMetodoPago(dto.getMetodoPago());
-        boleta.setTotal(dto.getTotal());
-
-        List<DetalleBoleta> detalles = new ArrayList<>();
-
-        for (DetalleBoletaDTO item : dto.getDetalles()) {
-
-            DetalleBoleta detalle = new DetalleBoleta();
-
-            detalle.setNombreProducto(item.getNombreProducto());
-            detalle.setPrecioUnitario(item.getPrecioUnitario());
-            detalle.setCantidad(item.getCantidad());
-            detalle.setSubtotal(item.getSubtotal());
-
-            detalle.setBoleta(boleta);
-
-            detalles.add(detalle);
-        }
-
-        boleta.setDetalles(detalles);
-
-        return boletaRepository.save(boleta);
+    // Lista de entities → Lista de DTOs
+    public List<BoletaDTO> listarTodas() {
+        return boletaMapper.toDTOList(boletaRepository.findAll());
     }
 
-    public Boleta buscarPorId(Long id) {
-        return boletaRepository.findById(id).orElse(null);
+    // DTO → Entity → guardar
+    public BoletaDTO guardar(BoletaDTO dto) {
+        Boleta boleta = boletaMapper.toEntity(dto);
+        return boletaMapper.toDTO(boletaRepository.save(boleta));
+    }
+
+    // Entity → DTO
+    public BoletaDTO buscarPorId(Long id) {
+        Boleta boleta = boletaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Boleta no encontrada"));
+        return boletaMapper.toDTO(boleta);
     }
 
     public void eliminar(Long id) {

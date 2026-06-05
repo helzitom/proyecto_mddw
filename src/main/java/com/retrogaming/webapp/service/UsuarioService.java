@@ -3,62 +3,52 @@ package com.retrogaming.webapp.service;
 import com.retrogaming.webapp.dto.LoginDTO;
 import com.retrogaming.webapp.dto.RecuperarDTO;
 import com.retrogaming.webapp.dto.RegistroDTO;
-import com.retrogaming.webapp.entity.Usuario;
+import com.retrogaming.webapp.mapper.UsuarioMapper;
+import com.retrogaming.webapp.model.Usuario;
 import com.retrogaming.webapp.repository.UsuarioRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final UsuarioMapper usuarioMapper;
 
-    public Usuario registrar(RegistroDTO dto) {
+    public UsuarioService(UsuarioRepository usuarioRepository,
+                          UsuarioMapper usuarioMapper) {
+        this.usuarioRepository = usuarioRepository;
+        this.usuarioMapper     = usuarioMapper;
+    }
 
-        Usuario u = new Usuario();
-
-        u.setUsuario(dto.getUsuario());
-        u.setCorreo(dto.getCorreo());
-        u.setPassword(dto.getPassword());
-
+    // DTO → Entity → guardar
+    public RegistroDTO registrar(RegistroDTO dto) {
+        Usuario u = usuarioMapper.toEntity(dto);
         u.setRol(dto.getRol().toLowerCase());
-
-        u.setActivo(true);
-
-        return usuarioRepository.save(u);
+        return usuarioMapper.toDTO(usuarioRepository.save(u));
     }
 
     public Usuario login(LoginDTO dto) {
+        Usuario user = usuarioRepository
+                .findByUsuarioAndPassword(dto.getUser(), dto.getPass())
+                .orElse(null);
 
-        Optional<Usuario> opt =
-                usuarioRepository.findByUsuarioAndPassword(
-                        dto.getUser(),
-                        dto.getPass()
-                );
+        if (user == null) return null;
 
-        if (opt.isPresent()) {
-
-            Usuario user = opt.get();
-
-            if (!user.isActivo()) {
-                throw new RuntimeException("Usuario bloqueado");
-            }
-
-            return user;
+        if (!user.isActivo()) {
+            throw new RuntimeException("Usuario bloqueado");
         }
 
-        return null;
+        return user;
     }
 
-    public List<Usuario> listarTodos() {
-        return usuarioRepository.findAll();
+    // Lista de entities → Lista de DTOs
+    public List<RegistroDTO> listarTodos() {
+        return usuarioMapper.toDTOList(usuarioRepository.findAll());
     }
 
     public void eliminar(Long id) {
@@ -66,28 +56,21 @@ public class UsuarioService {
     }
 
     public void toggleEstado(Long id) {
-
         Usuario user = usuarioRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Usuario no encontrado"));
-
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         user.setActivo(!user.isActivo());
-
         usuarioRepository.save(user);
     }
 
     public void cambiarPassword(RecuperarDTO dto) {
-
         if (!dto.getPassword().equals(dto.getConfirm())) {
             throw new RuntimeException("Las contraseñas no coinciden");
         }
 
         Usuario user = usuarioRepository.findByUsuario(dto.getUsuario())
-                .orElseThrow(() ->
-                        new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         user.setPassword(dto.getPassword());
-
         usuarioRepository.save(user);
     }
 }

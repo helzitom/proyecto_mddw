@@ -1,11 +1,13 @@
 package com.retrogaming.webapp.repository;
 
-import com.retrogaming.webapp.entity.Producto;
+import com.retrogaming.webapp.model.Producto;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ProductoRepository
         extends JpaRepository<Producto, Long> {
 

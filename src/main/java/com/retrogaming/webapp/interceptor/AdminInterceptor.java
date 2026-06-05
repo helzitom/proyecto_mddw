@@ -1,6 +1,6 @@
 package com.retrogaming.webapp.interceptor;
 
-import com.retrogaming.webapp.entity.Usuario;
+import com.retrogaming.webapp.model.Usuario;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;

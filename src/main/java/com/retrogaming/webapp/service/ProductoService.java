@@ -1,39 +1,54 @@
 package com.retrogaming.webapp.service;
 
-import com.retrogaming.webapp.entity.Producto;
+import com.retrogaming.webapp.dto.ProductoDTO;
+import com.retrogaming.webapp.mapper.ProductoMapper;
+import com.retrogaming.webapp.model.Producto;
 import com.retrogaming.webapp.repository.ProductoRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ProductoService {
 
-    @Autowired
-    private ProductoRepository productoRepository;
+    private final ProductoRepository productoRepository;
+    private final ProductoMapper productoMapper;
 
-    public List<Producto> listarTodos() {
-        return productoRepository.findAll();
+    public ProductoService(ProductoRepository productoRepository,
+                           ProductoMapper productoMapper) {
+        this.productoRepository = productoRepository;
+        this.productoMapper     = productoMapper;
     }
 
-    public List<Producto> listarPorTipo(String tipo) {
-        return productoRepository.findByTipo(tipo);
+    // Lista de entities → Lista de DTOs
+    public List<ProductoDTO> listarTodos() {
+        return productoMapper.toDTOList(productoRepository.findAll());
     }
 
-    public Producto guardar(Producto producto) {
+    // Lista de entities por tipo → Lista de DTOs
+    public List<ProductoDTO> listarPorTipo(String tipo) {
+        return productoMapper.toDTOList(productoRepository.findByTipo(tipo));
+    }
 
-        if (producto.getStock() == null) {
-            producto.setStock(0);
+    // DTO → Entity → guardar
+    public ProductoDTO guardar(ProductoDTO dto) {
+        Producto entity = productoMapper.toEntity(dto);
+
+        if (entity.getStock() == null) {
+            entity.setStock(0);
         }
 
-        return productoRepository.save(producto);
+        return productoMapper.toDTO(productoRepository.save(entity));
     }
 
-    public Producto buscarPorId(Long id) {
-        return productoRepository.findById(id)
+    // Entity → DTO
+    public ProductoDTO buscarPorId(Long id) {
+        Producto entity = productoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        return productoMapper.toDTO(entity);
     }
 
     public void eliminar(Long id) {
