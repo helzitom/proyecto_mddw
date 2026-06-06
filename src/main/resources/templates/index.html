@@ -86,6 +86,113 @@
             <div class="col-6 col-md-3"><img th:src="@{/img/Zelda A link.webp}" class="img-fluid rounded"></div>
         </div>
     </section>
+    <!-- HERO -->
+    <section class="hero-contacto text-center py-5">
+        <div class="container">
+            <h1 class="display-3 fw-bold text-warning">CONTÁCTANOS</h1>
+            <p class="lead">
+                ¿Tienes dudas sobre ROMs, emuladores o consolas retro?
+                Estamos listos para ayudarte.
+            </p>
+        </div>
+    </section>
+
+    <!-- INFORMACIÓN -->
+    <section class="container py-5">
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+                <div class="card contacto-card h-100 text-center">
+                    <div class="card-body">
+                        <h2 class="display-5">📧</h2>
+                        <h4>Email</h4>
+                        <p>retrogaming@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card contacto-card h-100 text-center">
+                    <div class="card-body">
+                        <h2 class="display-5">📱</h2>
+                        <h4>Teléfono</h4>
+                        <p>+51 942 313 235</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card contacto-card h-100 text-center">
+                    <div class="card-body">
+                        <h2 class="display-5">🎮</h2>
+                        <h4>Comunidad</h4>
+                        <p>Más de 5,000 retro gamers.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FORMULARIO -->
+    <section class="container pb-5">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="card formulario-card">
+                    <div class="card-body p-4">
+
+                        <h2 class="text-center text-warning mb-4">
+                            Envíanos un mensaje
+                        </h2>
+
+                        <form>
+
+                            <div class="mb-3">
+                                <label class="form-label">Nombre completo</label>
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Ingresa tu nombre">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Correo electrónico</label>
+                                <input type="email"
+                                       class="form-control"
+                                       placeholder="email@ejemplo.com">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Asunto</label>
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="¿En qué podemos ayudarte?">
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label">Mensaje</label>
+                                <textarea class="form-control"
+                                          rows="6"
+                                          placeholder="Escribe tu mensaje aquí..."></textarea>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit"
+                                        class="btn btn-warning btn-lg px-5">
+                                    Enviar Mensaje
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
 </main>
 
 <div th:replace="fragments/footer :: footer"></div>

@@ -37,3 +37,109 @@ img[alt="Pacman"] {
     display: block;
     margin: 10px auto 0;
 }
+/* Fondo retro */
+
+body{
+    background-image: url("../imagenes/fondo01.gif");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: #111;
+}
+
+/* Hero */
+
+.hero-contacto{
+    background: linear-gradient(
+        rgba(0,0,0,0.75),
+        rgba(0,0,0,0.75)
+    );
+    border-bottom: 2px solid #ffc107;
+}
+
+.hero-contacto h1{
+    text-shadow: 0 0 15px #ffc107;
+}
+
+.hero-contacto p{
+    max-width: 700px;
+    margin: auto;
+    color: #ddd;
+}
+
+/* Tarjetas de información */
+
+.contacto-card{
+    background: rgba(33, 37, 41, 0.95);
+    border: 2px solid #ffc107;
+    color: white;
+    transition: all .3s ease;
+    box-shadow: 0 0 20px #ffc10740;
+}
+
+.contacto-card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px #ffc107aa;
+}
+
+/* Formulario */
+
+.formulario-card{
+    background: rgba(33, 37, 41, 0.95);
+    border: 2px solid #ffc107;
+    box-shadow: 0 0 30px #ffc10755;
+    color: white;
+}
+
+/* Inputs */
+
+.form-control{
+    background-color: #1d1d1d;
+    border: 1px solid #555;
+    color: white;
+}
+
+.form-control::placeholder{
+    color: #aaa;
+}
+
+.form-control:focus{
+    background-color: #1d1d1d;
+    color: white;
+    border-color: #ffc107;
+    box-shadow: 0 0 10px #ffc107aa;
+}
+
+/* Botón */
+
+.btn-warning{
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all .3s ease;
+}
+
+.btn-warning:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #ffc107;
+}
+
+/* Labels */
+
+.form-label{
+    color: #ffc107;
+    font-weight: 600;
+}
+
+/* Responsive */
+
+@media (max-width: 768px){
+
+    .hero-contacto h1{
+        font-size: 2.5rem;
+    }
+
+    .contacto-card{
+        margin-bottom: 15px;
+    }
+
+}
